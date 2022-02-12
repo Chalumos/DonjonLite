@@ -1,9 +1,6 @@
 package Monde;
 
-import Monde.salle.Salle;
-import Monde.salle.SalleFinEtage;
-import Monde.salle.SalleNormal;
-import Monde.salle.SalleTresor;
+import Monde.salle.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +12,8 @@ public class Etage {
 
     public Etage(){
         carteEtage[0][0] = new SalleNormal();
-        carteEtage[0][1] = new SalleTresor();
+        carteEtage[0][1] = new SalleMonstre();
+        carteEtage[1][0] = new SalleTresor();
         carteEtage[1][1] = new SalleFinEtage();
     }
 

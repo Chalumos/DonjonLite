@@ -11,6 +11,7 @@ public class SalleNormal extends Salle {
 	@Override
 	public void actionSalle(Aventurier aventurier) {
 		System.out.println("Il n'y a rien ici !");
+		setSalleExplore(true);
 		
 	}
 

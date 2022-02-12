@@ -45,7 +45,9 @@ public class Jeu {
     }
 
     public void actionSalleAcuel() {
-        monde.salleActuelle().actionSalle(monde.getAventurier());
+        if (!monde.salleActuelle().isSalleExplore()){
+            monde.salleActuelle().actionSalle(monde.getAventurier());
+        }
     }
 
     public void deplacerPersonnage(){
