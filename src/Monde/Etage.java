@@ -3,20 +3,39 @@ package Monde;
 import Monde.salle.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
 
 public class Etage {
-    int maxCarte = 2;
+    int maxCarte = 3;
     Salle[][] carteEtage = new Salle[maxCarte][maxCarte];
 
     public Etage(){
-        carteEtage[0][0] = new SalleNormal();
-        carteEtage[0][1] = new SalleMonstre();
-        carteEtage[1][0] = new SalleTresor();
-        carteEtage[1][1] = new SalleFinEtage();
+        carteEtage[0][0] = creationSalleAleatoire();
+        carteEtage[0][1] = creationSalleAleatoire();
+        carteEtage[0][2] = creationSalleAleatoire();
+        carteEtage[1][0] = creationSalleAleatoire();
+        carteEtage[1][1] = creationSalleAleatoire();
+        carteEtage[1][2] = creationSalleAleatoire();
+        carteEtage[2][0] = creationSalleAleatoire();
+        carteEtage[2][1] = creationSalleAleatoire();
+        carteEtage[2][2] = new SalleFinEtage();
     }
 
+    public Salle creationSalleAleatoire() {
+        Random random = new Random();
+        int nbSalle = 1 + random.nextInt(4-1);
+        switch (nbSalle){
+            case 1 :
+                return new SalleNormal();
+            case 2 :
+                return new SalleTresor();
+            case 3 :
+                return new SalleEnnemi();
+            default:
+                nbSalle = 1 + random.nextInt(3-1);
+        }
+        return null;
+    }
     public Salle recuperationSalle(int y, int x){
         return carteEtage[y][x];
     }
@@ -24,6 +43,7 @@ public class Etage {
 
     public ArrayList<String> salleAlentour(int y, int x){
         ArrayList<String> directionsAlentour = new ArrayList<String>();
+        /*
         if (y > 0) {
             if(recuperationSalle(y - 1, x) != null){
                 directionsAlentour.add("bas");
@@ -34,7 +54,7 @@ public class Etage {
                 directionsAlentour.add("gauche");
             }
         }
-
+        */
         if ( (y+1) < maxCarte) {
             if (recuperationSalle(y + 1, x) != null) {
                 directionsAlentour.add("haut");
@@ -47,8 +67,6 @@ public class Etage {
         }
         return  directionsAlentour;
     }
-
-
 
     /*
     public Map<String,Salle> salleAlentour(int y, int x){

@@ -31,19 +31,11 @@ public class Aventurier extends Personne {
 			case "haut":
 				setPositionY(getPositionY() + 1);
 				break;
-			case "bas":
-				setPositionY(getPositionY() - 1);
-				break;
-			case "gauche":
-				setPositionX(getPositionX() - 1);
-				break;
 			case "droite":
 				setPositionX(getPositionX() + 1);
 				break;
 		}
 	}
-
-
 
 	public void gagnerOr(int or){
 		bourseOr += or;
@@ -52,7 +44,7 @@ public class Aventurier extends Personne {
 	}
 
 	public void recupererArme(Arme armeTresor){
-		System.out.println("Bien joue vous avez trouver "+armeTresor.getNom()+" de puissance "+armeTresor.getForce());
+		System.out.println("Bien joue vous avez trouver "+armeTresor.getNom()+" une arme de puissance "+armeTresor.getForce());
 		setArme(armeTresor);
 	}
 
@@ -64,6 +56,11 @@ public class Aventurier extends Personne {
 			degat += getArme().getForce();
 		}
 		return degat;
+	}
+
+	public void monterEtage(){
+		positionY = 0;
+		positionX = 0;
 	}
 
 	public int getPositionY() {

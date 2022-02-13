@@ -8,24 +8,25 @@ import java.util.Map;
 
 public class Monde {
     ArrayList<Etage> carte = new ArrayList<Etage>();
+    int etageActuel = 0;
     Aventurier aventurier;
 
     public Monde(){
-        Etage etage1 = new Etage();
-        carte.add(etage1);
-
+        for (int i = 0; i<10; i++ ){
+            carte.add(new Etage());
+        }
         aventurier = new Aventurier();
     }
 
     public Salle salleActuelle(){
-        Salle salleActuelle = this.getCarte().get(0).recuperationSalle(this.getAventurier().getPositionY(), this.getAventurier().getPositionX());
+        Salle salleActuelle = this.getCarte().get(etageActuel).recuperationSalle(this.getAventurier().getPositionY(), this.getAventurier().getPositionX());
 
         return salleActuelle;
     }
 
     public ArrayList<String> salleAlentour(){
         ArrayList<String> sallesAlentour;
-        sallesAlentour = getCarte().get(0).salleAlentour(this.getAventurier().getPositionY(), this.getAventurier().getPositionX());
+        sallesAlentour = getCarte().get(etageActuel).salleAlentour(this.getAventurier().getPositionY(), this.getAventurier().getPositionX());
         return sallesAlentour;
     }
 
@@ -45,5 +46,13 @@ public class Monde {
 
     public void setAventurier(Aventurier aventurier) {
         this.aventurier = aventurier;
+    }
+
+    public int getEtageActuel() {
+        return etageActuel;
+    }
+
+    public void setEtageActuel(int etageActuel) {
+        this.etageActuel = etageActuel;
     }
 }

@@ -1,13 +1,8 @@
 package laucher;
 
-import Monde.Etage;
-import Monde.Monde;
-import Monde.salle.Salle;
-import Monde.salle.SalleFinEtage;
-import personnage.Aventurier;
 
+import Monde.Monde;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Jeu {
@@ -20,15 +15,12 @@ public class Jeu {
     }
 
     public void jouer() {
+        System.out.println("---- Bienvenue dans donjon lite ----");
+        //choisirNomAventurier();
+        System.out.println("---- Etage"+(monde.getEtageActuel()+1)+" ----");
+        salleActuelAventurier();
         while (!this.jeuFini) {
-            System.out.println("---- Bienvenue dans donjon lite ----");
-            //choisirNomAventurier();
-            salleActuelAventurier();
-            while (!monde.salleActuelle().getClass().toString().equals("class Monde.salle.SalleFinEtage")){
-                deplacerPersonnage();
-            }
-
-            jeuFini = true;
+            deplacerPersonnage();
         }
     }
     public void choisirNomAventurier(){
@@ -40,8 +32,21 @@ public class Jeu {
     }
 
     public void salleActuelAventurier() {
-        System.out.println("Vous êtes actuellement dans la : "+monde.salleActuelle());
+        System.out.println("---- "+monde.salleActuelle()+" ----");
         actionSalleAcuel();
+        if (monde.salleActuelle().getClass().toString().equals("class Monde.salle.SalleFinEtage")){
+            if( (monde.getEtageActuel()+1) == monde.getCarte().size()){
+                System.out.println("---- Vous avez fini DonjonLite ----");
+                jeuFini = true;
+            }
+            else {
+                monde.setEtageActuel(monde.getEtageActuel()+1);
+                monde.getAventurier().monterEtage();
+                System.out.println("---- Etage"+(monde.getEtageActuel()+1)+" ----");
+                salleActuelAventurier();
+            }
+
+        }
     }
 
     public void actionSalleAcuel() {
@@ -53,10 +58,8 @@ public class Jeu {
     public void deplacerPersonnage(){
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> directionsAlentour = monde.salleAlentour();
-        for (String direction : directionsAlentour) {
-            System.out.println("Vous pouvez aller à "+direction);
-        }
-        System.out.println("Dans quelles directions voulez vous aller ?");
+        System.out.println("Les directions possibles : "+ directionsAlentour);
+        System.out.println("Dans quelle direction voulez-vous aller ?");
         String deplacement =  scanner.next().toLowerCase();
         directionsAlentour.contains(deplacement);
         if(directionsAlentour.contains(deplacement)){
@@ -65,8 +68,6 @@ public class Jeu {
         }
         else {
             System.out.println("Cette direction est impossible");
-            System.out.println("Dans quelles directions voulez vous aller ?");
         }
-
     }
 }
