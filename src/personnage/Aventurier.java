@@ -52,7 +52,7 @@ public class Aventurier extends Personne {
 	}
 
 	public void recupererArme(Arme armeTresor){
-		System.out.println("Bien joue vous avez trouver "+armeTresor.getNom()+" de puissance "+armeTresor.getForce());
+		System.out.println("Bien joue vous avez trouver "+armeTresor.getNom()+" une arme de puissance "+armeTresor.getForce());
 		setArme(armeTresor);
 	}
 

@@ -20,6 +20,16 @@ public class Jeu {
     }
 
     public void jouer() {
+        System.out.println( "maxCarte = "+monde.getCarte().get(0).getMaxCarte());
+        Salle[][]  carte = monde.getCarte().get(0).getCarteEtage();
+        for (int i = 0; i<monde.getCarte().get(0).getMaxCarte(); i++){
+            for (int j = 0; j<monde.getCarte().get(0).getMaxCarte(); j++){
+                if(carte[i][j] != null)
+                    System.out.println(carte[i][j] + "[y:" + i + " x:" + j + "]");
+            }
+        }
+
+        /*
         while (!this.jeuFini) {
             System.out.println("---- Bienvenue dans donjon lite ----");
             //choisirNomAventurier();
@@ -30,6 +40,7 @@ public class Jeu {
 
             jeuFini = true;
         }
+         */
     }
     public void choisirNomAventurier(){
         Scanner scanner = new Scanner(System.in);
@@ -53,10 +64,8 @@ public class Jeu {
     public void deplacerPersonnage(){
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> directionsAlentour = monde.salleAlentour();
-        for (String direction : directionsAlentour) {
-            System.out.println("Vous pouvez aller à "+direction);
-        }
-        System.out.println("Dans quelles directions voulez vous aller ?");
+        System.out.println("Les directions possibles : "+ directionsAlentour);
+        System.out.println("Dans quelle direction voulez-vous aller ?");
         String deplacement =  scanner.next().toLowerCase();
         directionsAlentour.contains(deplacement);
         if(directionsAlentour.contains(deplacement)){

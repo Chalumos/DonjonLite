@@ -5,23 +5,21 @@ import personnage.Ennemi;
 
 import java.util.Random;
 
-public class SalleMonstre extends Salle {
+public class SalleEnnemi extends Salle {
 	Ennemi ennemi;
 
-	public SalleMonstre(){
+	public SalleEnnemi(){
 		ennemi = new Ennemi();
 	}
 
 	@Override
 	public void actionSalle(Aventurier aventurier) {
-		System.out.println(ennemi.getNom()+" vous attaque !");
+		System.out.println(ennemi.getNom()+" vous aborde !");
 		combat(aventurier,ennemi);
 		setSalleExplore(true);
 	}
 
 	public void combat(Aventurier aventurier, Ennemi ennemi){
-		int degatAventurier = 0;
-		int degatEnnemi = 0;
 		while ( (ennemi.getVie() > 0) && (aventurier.getVie() > 0) ){
 			if (aventurier.getVitesse() > ennemi.getVitesse()){
 				attaqueAventurier(aventurier);
@@ -58,7 +56,13 @@ public class SalleMonstre extends Salle {
 			int degatAventurier = aventurier.combattre();
 			ennemi.setVie(ennemi.getVie() - degatAventurier);
 			System.out.println("vous infigez "+ degatAventurier +" à "+ennemi.getNom());
-			System.out.println("il reste "+ennemi.getVie()+ " PV à "+ennemi.getNom());
+			if(ennemi.getVie() > 0 ){
+				System.out.println("il reste "+ennemi.getVie()+ " PV à "+ennemi.getNom());
+			}
+			else {
+				System.out.println(ennemi.getNom()+" a été vaincu !");
+			}
+
 		}
 	}
 
